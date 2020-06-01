@@ -1,23 +1,21 @@
 cmake_minimum_required(VERSION 3.2)
-project(libsbp C)
+project(libsbp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" "${CMAKE_CURRENT_LIST_DIR}/cmake/common")
 
 include(GNUInstallDirs)
 include(CCache)
-include(SwiftCmakeOptions)
-swift_create_project_options(
-    HAS_TESTS
-    HAS_DOCS
-    TEST_PACKAGES "Check"
-    )
-include(CodeCoverage)
-include(TestTargets)
-add_code_coverage_all_targets()
-
-if(libsbp_BUILD_TESTS)
-  find_package(Googletest)
-endif()
+#include(SwiftCmakeOptions)
+#swift_create_project_options(
+#    HAS_TESTS
+#    HAS_DOCS
+#    TEST_PACKAGES "Check"
+#    )
+#include(CodeCoverage)
+#include(TestTargets)
+#add_code_coverage_all_targets()
+#
+#find_package(Googletest REQUIRED)
 
 ##########################################################
 # Set some reasonable default compiler flags.
@@ -27,8 +25,6 @@ endif()
 ##########################################################
 if(MSVC)
     set(LIBSBP_CFLAGS "/Wall" CACHE STRING "Compile flags for libsbp.")
-elseif(CMAKE_C_COMPILER_ID MATCHES "ARMCC")
-    # Warnings are on by default in armcc
 else()
     set(LIBSBP_CFLAGS "-Wall -Werror" CACHE STRING "Compile flags for libsbp.")
 endif()
